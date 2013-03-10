@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A956055D16EC492A00404D15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A956055C16EC492A00404D15 /* UIKit.framework */; };
+		A956055F16EC492A00404D15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A956055E16EC492A00404D15 /* Foundation.framework */; };
+		A956056116EC492A00404D15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A956056016EC492A00404D15 /* CoreGraphics.framework */; };
+		A956056716EC492A00404D15 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A956056516EC492A00404D15 /* InfoPlist.strings */; };
+		A956056916EC492A00404D15 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A956056816EC492A00404D15 /* main.m */; };
+		A956056D16EC492A00404D15 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A956056C16EC492A00404D15 /* AppDelegate.m */; };
+		A956056F16EC492A00404D15 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A956056E16EC492A00404D15 /* Default.png */; };
+		A956057116EC492A00404D15 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A956057016EC492A00404D15 /* Default@2x.png */; };
+		A956057316EC492A00404D15 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A956057216EC492A00404D15 /* Default-568h@2x.png */; };
+		A956057616EC492A00404D15 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A956057516EC492A00404D15 /* MasterViewController.m */; };
+		A956057916EC492A00404D15 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A956057816EC492A00404D15 /* DetailViewController.m */; };
+		A956057C16EC492A00404D15 /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A956057A16EC492A00404D15 /* MasterViewController.xib */; };
+		A956057F16EC492A00404D15 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A956057D16EC492A00404D15 /* DetailViewController.xib */; };
+		A956058716EC492A00404D15 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A956058616EC492A00404D15 /* SenTestingKit.framework */; };
+		A956058816EC492A00404D15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A956055C16EC492A00404D15 /* UIKit.framework */; };
+		A956058916EC492A00404D15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A956055E16EC492A00404D15 /* Foundation.framework */; };
+		A956059116EC492A00404D15 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A956058F16EC492A00404D15 /* InfoPlist.strings */; };
+		A956059416EC492B00404D15 /* ModalGroupContactsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A956059316EC492B00404D15 /* ModalGroupContactsTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A956058A16EC492A00404D15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A956055116EC492A00404D15 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A956055816EC492A00404D15;
+			remoteInfo = ModalGroupContacts;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A956055916EC492A00404D15 /* ModalGroupContacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModalGroupContacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A956055C16EC492A00404D15 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A956055E16EC492A00404D15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A956056016EC492A00404D15 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A956056416EC492A00404D15 /* ModalGroupContacts-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ModalGroupContacts-Info.plist"; sourceTree = "<group>"; };
+		A956056616EC492A00404D15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A956056816EC492A00404D15 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A956056A16EC492A00404D15 /* ModalGroupContacts-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ModalGroupContacts-Prefix.pch"; sourceTree = "<group>"; };
+		A956056B16EC492A00404D15 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A956056C16EC492A00404D15 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A956056E16EC492A00404D15 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A956057016EC492A00404D15 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A956057216EC492A00404D15 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A956057416EC492A00404D15 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		A956057516EC492A00404D15 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		A956057716EC492A00404D15 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		A956057816EC492A00404D15 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		A956057B16EC492A00404D15 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController.xib; sourceTree = "<group>"; };
+		A956057E16EC492A00404D15 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
+		A956058516EC492A00404D15 /* ModalGroupContactsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModalGroupContactsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A956058616EC492A00404D15 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		A956058E16EC492A00404D15 /* ModalGroupContactsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ModalGroupContactsTests-Info.plist"; sourceTree = "<group>"; };
+		A956059016EC492A00404D15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A956059216EC492B00404D15 /* ModalGroupContactsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModalGroupContactsTests.h; sourceTree = "<group>"; };
+		A956059316EC492B00404D15 /* ModalGroupContactsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModalGroupContactsTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A956055616EC492A00404D15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A956055D16EC492A00404D15 /* UIKit.framework in Frameworks */,
+				A956055F16EC492A00404D15 /* Foundation.framework in Frameworks */,
+				A956056116EC492A00404D15 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A956058116EC492A00404D15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A956058716EC492A00404D15 /* SenTestingKit.framework in Frameworks */,
+				A956058816EC492A00404D15 /* UIKit.framework in Frameworks */,
+				A956058916EC492A00404D15 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A956055016EC492A00404D15 = {
+			isa = PBXGroup;
+			children = (
+				A956056216EC492A00404D15 /* ModalGroupContacts */,
+				A956058C16EC492A00404D15 /* ModalGroupContactsTests */,
+				A956055B16EC492A00404D15 /* Frameworks */,
+				A956055A16EC492A00404D15 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A956055A16EC492A00404D15 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A956055916EC492A00404D15 /* ModalGroupContacts.app */,
+				A956058516EC492A00404D15 /* ModalGroupContactsTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A956055B16EC492A00404D15 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A956055C16EC492A00404D15 /* UIKit.framework */,
+				A956055E16EC492A00404D15 /* Foundation.framework */,
+				A956056016EC492A00404D15 /* CoreGraphics.framework */,
+				A956058616EC492A00404D15 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A956056216EC492A00404D15 /* ModalGroupContacts */ = {
+			isa = PBXGroup;
+			children = (
+				A956056B16EC492A00404D15 /* AppDelegate.h */,
+				A956056C16EC492A00404D15 /* AppDelegate.m */,
+				A956057416EC492A00404D15 /* MasterViewController.h */,
+				A956057516EC492A00404D15 /* MasterViewController.m */,
+				A956057716EC492A00404D15 /* DetailViewController.h */,
+				A956057816EC492A00404D15 /* DetailViewController.m */,
+				A956057A16EC492A00404D15 /* MasterViewController.xib */,
+				A956057D16EC492A00404D15 /* DetailViewController.xib */,
+				A956056316EC492A00404D15 /* Supporting Files */,
+			);
+			path = ModalGroupContacts;
+			sourceTree = "<group>";
+		};
+		A956056316EC492A00404D15 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A956056416EC492A00404D15 /* ModalGroupContacts-Info.plist */,
+				A956056516EC492A00404D15 /* InfoPlist.strings */,
+				A956056816EC492A00404D15 /* main.m */,
+				A956056A16EC492A00404D15 /* ModalGroupContacts-Prefix.pch */,
+				A956056E16EC492A00404D15 /* Default.png */,
+				A956057016EC492A00404D15 /* Default@2x.png */,
+				A956057216EC492A00404D15 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A956058C16EC492A00404D15 /* ModalGroupContactsTests */ = {
+			isa = PBXGroup;
+			children = (
+				A956059216EC492B00404D15 /* ModalGroupContactsTests.h */,
+				A956059316EC492B00404D15 /* ModalGroupContactsTests.m */,
+				A956058D16EC492A00404D15 /* Supporting Files */,
+			);
+			path = ModalGroupContactsTests;
+			sourceTree = "<group>";
+		};
+		A956058D16EC492A00404D15 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A956058E16EC492A00404D15 /* ModalGroupContactsTests-Info.plist */,
+				A956058F16EC492A00404D15 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A956055816EC492A00404D15 /* ModalGroupContacts */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A956059716EC492B00404D15 /* Build configuration list for PBXNativeTarget "ModalGroupContacts" */;
+			buildPhases = (
+				A956055516EC492A00404D15 /* Sources */,
+				A956055616EC492A00404D15 /* Frameworks */,
+				A956055716EC492A00404D15 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ModalGroupContacts;
+			productName = ModalGroupContacts;
+			productReference = A956055916EC492A00404D15 /* ModalGroupContacts.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A956058416EC492A00404D15 /* ModalGroupContactsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A956059A16EC492B00404D15 /* Build configuration list for PBXNativeTarget "ModalGroupContactsTests" */;
+			buildPhases = (
+				A956058016EC492A00404D15 /* Sources */,
+				A956058116EC492A00404D15 /* Frameworks */,
+				A956058216EC492A00404D15 /* Resources */,
+				A956058316EC492A00404D15 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A956058B16EC492A00404D15 /* PBXTargetDependency */,
+			);
+			name = ModalGroupContactsTests;
+			productName = ModalGroupContactsTests;
+			productReference = A956058516EC492A00404D15 /* ModalGroupContactsTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A956055116EC492A00404D15 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = marco;
+			};
+			buildConfigurationList = A956055416EC492A00404D15 /* Build configuration list for PBXProject "ModalGroupContacts" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A956055016EC492A00404D15;
+			productRefGroup = A956055A16EC492A00404D15 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A956055816EC492A00404D15 /* ModalGroupContacts */,
+				A956058416EC492A00404D15 /* ModalGroupContactsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A956055716EC492A00404D15 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A956056716EC492A00404D15 /* InfoPlist.strings in Resources */,
+				A956056F16EC492A00404D15 /* Default.png in Resources */,
+				A956057116EC492A00404D15 /* Default@2x.png in Resources */,
+				A956057316EC492A00404D15 /* Default-568h@2x.png in Resources */,
+				A956057C16EC492A00404D15 /* MasterViewController.xib in Resources */,
+				A956057F16EC492A00404D15 /* DetailViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A956058216EC492A00404D15 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A956059116EC492A00404D15 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A956058316EC492A00404D15 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A956055516EC492A00404D15 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A956056916EC492A00404D15 /* main.m in Sources */,
+				A956056D16EC492A00404D15 /* AppDelegate.m in Sources */,
+				A956057616EC492A00404D15 /* MasterViewController.m in Sources */,
+				A956057916EC492A00404D15 /* DetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A956058016EC492A00404D15 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A956059416EC492B00404D15 /* ModalGroupContactsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A956058B16EC492A00404D15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A956055816EC492A00404D15 /* ModalGroupContacts */;
+			targetProxy = A956058A16EC492A00404D15 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A956056516EC492A00404D15 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A956056616EC492A00404D15 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A956057A16EC492A00404D15 /* MasterViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A956057B16EC492A00404D15 /* en */,
+			);
+			name = MasterViewController.xib;
+			sourceTree = "<group>";
+		};
+		A956057D16EC492A00404D15 /* DetailViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A956057E16EC492A00404D15 /* en */,
+			);
+			name = DetailViewController.xib;
+			sourceTree = "<group>";
+		};
+		A956058F16EC492A00404D15 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A956059016EC492A00404D15 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A956059516EC492B00404D15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A956059616EC492B00404D15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A956059816EC492B00404D15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ModalGroupContacts/ModalGroupContacts-Prefix.pch";
+				INFOPLIST_FILE = "ModalGroupContacts/ModalGroupContacts-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A956059916EC492B00404D15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ModalGroupContacts/ModalGroupContacts-Prefix.pch";
+				INFOPLIST_FILE = "ModalGroupContacts/ModalGroupContacts-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A956059B16EC492B00404D15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ModalGroupContacts.app/ModalGroupContacts";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ModalGroupContacts/ModalGroupContacts-Prefix.pch";
+				INFOPLIST_FILE = "ModalGroupContactsTests/ModalGroupContactsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		A956059C16EC492B00404D15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ModalGroupContacts.app/ModalGroupContacts";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ModalGroupContacts/ModalGroupContacts-Prefix.pch";
+				INFOPLIST_FILE = "ModalGroupContactsTests/ModalGroupContactsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A956055416EC492A00404D15 /* Build configuration list for PBXProject "ModalGroupContacts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A956059516EC492B00404D15 /* Debug */,
+				A956059616EC492B00404D15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A956059716EC492B00404D15 /* Build configuration list for PBXNativeTarget "ModalGroupContacts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A956059816EC492B00404D15 /* Debug */,
+				A956059916EC492B00404D15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A956059A16EC492B00404D15 /* Build configuration list for PBXNativeTarget "ModalGroupContactsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A956059B16EC492B00404D15 /* Debug */,
+				A956059C16EC492B00404D15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A956055116EC492A00404D15 /* Project object */;
+}
