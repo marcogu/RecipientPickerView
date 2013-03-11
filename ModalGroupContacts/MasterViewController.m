@@ -41,6 +41,7 @@
 
     UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)] autorelease];
     self.navigationItem.rightBarButtonItem = addButton;
+    NSLog(@"%@", self.navigationController.navigationBar);
 }
 
 - (void)didReceiveMemoryWarning
