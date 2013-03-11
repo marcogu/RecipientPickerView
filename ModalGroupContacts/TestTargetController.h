@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestTargetController : UIViewController
+@class SearchBar;
 
+@interface TestTargetController : UIViewController
+{
+    SearchBar* _titlBar;
+}
 @end

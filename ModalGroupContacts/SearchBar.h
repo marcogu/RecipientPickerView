@@ -13,7 +13,6 @@
     UILabel* _titleLabel;
 }
 @property(nonatomic, readonly) UILabel* titleLabel;
-@property(nonatomic, copy) NSArray *items;
 - (void)shrinkActionPicker;
 - (void)close;
 - (void)open;

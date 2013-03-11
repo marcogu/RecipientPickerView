@@ -12,9 +12,15 @@
 {
     CAGradientLayer* _backgroundLayer;
     NSArray* _items;
+    UIButton* _searchBtn;
+    UITextField* _searchInput;
+    UIButton* _conformBtn;
     BOOL _isopen;
 }
 @property(nonatomic, retain) UIView* actionPickerView;
+@property(nonatomic, readonly) UIButton* searchBtn;
+@property(nonatomic, readonly) UITextField* searchInput;
+@property(nonatomic, readonly) UIButton* conformBtn;
 @end
 
 @implementation SearchBar
@@ -39,13 +45,16 @@
 
 -(void)setup{
     self.backgroundColor = [UIColor clearColor];
+    [self conformBtn];
     [self titleLabel];
     _backgroundLayer = [self createBackgroundLayer];
-    [self.actionPickerView.layer addSublayer:_backgroundLayer];
     UITapGestureRecognizer *tapGesture =
         [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleActionPickerViewTap:)];
     tapGesture.delegate = self;
+    [self.actionPickerView.layer addSublayer:_backgroundLayer];
     [self.actionPickerView addGestureRecognizer:tapGesture];
+    [self.actionPickerView addSubview:self.searchBtn];
+    [self.actionPickerView addSubview:self.searchInput];
     [tapGesture release];
     _isopen = NO;
 }
@@ -146,23 +155,6 @@
 	CGContextRestoreGState(context);
 }
 
-- (void)setItems:(NSArray *)newItems{
-    if (_items != newItems) {
-        for (UIView *subview in self.actionPickerView.subviews) {
-            [subview removeFromSuperview];
-        }
-        
-        [_items release];
-        _items = [newItems copy];
-        
-        for (id item in _items) {
-			if ([item isKindOfClass:[UIView class]]) {
-				[self.actionPickerView addSubview:item];
-			}
-        }
-    }
-}
-
 - (void)handleActionPickerViewTap:(UIGestureRecognizer *)gestureRecognizer {}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -185,6 +177,7 @@
         return;
     }
     _isopen = YES;
+    [self.searchInput becomeFirstResponder];
     __block __typeof__(self) blockSelf = self;
     [UIView animateWithDuration:0.2
         animations:^{
@@ -198,6 +191,8 @@
         return;
     }
     _isopen = NO;
+    self.searchInput.text = nil;
+    [self.searchInput resignFirstResponder];
     __block __typeof__(self) blockSelf = self;
     [UIView animateWithDuration:0.2
         animations:^{
@@ -206,5 +201,39 @@
     }];
 }
 
+-(UIButton*)searchBtn{
+    if(!_searchBtn) {
+        _searchBtn = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        [_searchBtn addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        [_searchBtn setImage:[UIImage imageNamed:@"UIButtonBarSearch"] forState:UIControlStateNormal];
+        _searchBtn.frame = CGRectMake(0.0f, 0.0f, 30.0f, 30.0f);
+        _searchBtn.imageEdgeInsets = UIEdgeInsetsMake(3.0f, 3.0f, 3.0f, 3.0f);
+        _searchBtn.center = CGPointMake(15.0f, 15.0f);
+    }
+    return _searchBtn;
+}
+
+-(UITextField*)searchInput{
+    if (!_searchInput) {
+        _searchInput = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 265, 20)];
+        _searchInput.font = [UIFont systemFontOfSize:14];
+        _searchInput.textColor = [UIColor whiteColor];
+        _searchInput.center = CGPointMake(168, 16.f);
+        _searchInput.placeholder = @"请输入搜索的内容";
+        _searchInput.autocorrectionType = UITextAutocorrectionTypeNo;
+        _searchInput.clearButtonMode = UITextFieldViewModeAlways;
+    }
+    return _searchInput;
+}
+// here need three20. UI 
+-(UIButton*)conformBtn{
+    if (!_conformBtn) {
+        _conformBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _conformBtn.frame = CGRectMake(15, 7, 40, 30);
+        [_conformBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [self addSubview:_conformBtn];
+    }
+    return _conformBtn;
+}
 
 @end
