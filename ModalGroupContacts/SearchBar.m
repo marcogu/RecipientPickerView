@@ -45,7 +45,7 @@
 
 -(void)setup{
     self.backgroundColor = [UIColor clearColor];
-    [self conformBtn];
+//    [self conformBtn];
     [self titleLabel];
     _backgroundLayer = [self createBackgroundLayer];
     UITapGestureRecognizer *tapGesture =

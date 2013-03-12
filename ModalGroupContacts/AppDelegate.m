@@ -32,7 +32,7 @@
     TestTargetController* testTarget = [[[TestTargetController alloc] initWithNibName:nil bundle:nil] autorelease];
     self.navigationController = [[[UINavigationController alloc] initWithRootViewController:testTarget] autorelease];
     self.window.rootViewController = self.navigationController;
-    [self.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController setNavigationBarHidden:YES];
     [self.window makeKeyAndVisible];
 }
 
