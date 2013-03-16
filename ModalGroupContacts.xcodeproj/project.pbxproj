@@ -27,6 +27,8 @@
 		A9338DD516EDB41E00033194 /* mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9338DCF16EDB41E00033194 /* mail@2x.png */; };
 		A9338DD616EDB41E00033194 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = A9338DD016EDB41E00033194 /* twitter.png */; };
 		A9338DD716EDB41E00033194 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9338DD116EDB41E00033194 /* twitter@2x.png */; };
+		A94409F516F461E7007AA4E8 /* ICRecipientPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A94409F416F461E7007AA4E8 /* ICRecipientPicker.m */; };
+		A94409FF16F46406007AA4E8 /* ICRecipientPickerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A94409FE16F46405007AA4E8 /* ICRecipientPickerItem.m */; };
 		A955894316EECAFD0007E1A5 /* ModalGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = A955894216EECAFD0007E1A5 /* ModalGroupController.m */; };
 		A955896016EF0DCF0007E1A5 /* ICMenuTableSection.m in Sources */ = {isa = PBXBuildFile; fileRef = A955895F16EF0DCF0007E1A5 /* ICMenuTableSection.m */; };
 		A955896616EF19530007E1A5 /* ICMenuTableDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = A955896516EF19530007E1A5 /* ICMenuTableDatasource.m */; };
@@ -235,6 +237,10 @@
 		A9338DCF16EDB41E00033194 /* mail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mail@2x.png"; sourceTree = "<group>"; };
 		A9338DD016EDB41E00033194 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		A9338DD116EDB41E00033194 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
+		A94409F316F461E7007AA4E8 /* ICRecipientPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICRecipientPicker.h; sourceTree = "<group>"; };
+		A94409F416F461E7007AA4E8 /* ICRecipientPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICRecipientPicker.m; sourceTree = "<group>"; };
+		A94409FD16F46405007AA4E8 /* ICRecipientPickerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICRecipientPickerItem.h; sourceTree = "<group>"; };
+		A94409FE16F46405007AA4E8 /* ICRecipientPickerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICRecipientPickerItem.m; sourceTree = "<group>"; };
 		A955894116EECAFD0007E1A5 /* ModalGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalGroupController.h; sourceTree = "<group>"; };
 		A955894216EECAFD0007E1A5 /* ModalGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalGroupController.m; sourceTree = "<group>"; };
 		A955895E16EF0DCF0007E1A5 /* ICMenuTableSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMenuTableSection.h; sourceTree = "<group>"; };
@@ -417,6 +423,10 @@
 				A955896F16EF1FBE0007E1A5 /* FullScreenScrollViewDelegate.m */,
 				A91AE51316F0ADB600627068 /* SelectorTableViewDelegate.h */,
 				A91AE51416F0ADB600627068 /* SelectorTableViewDelegate.m */,
+				A94409F316F461E7007AA4E8 /* ICRecipientPicker.h */,
+				A94409F416F461E7007AA4E8 /* ICRecipientPicker.m */,
+				A94409FD16F46405007AA4E8 /* ICRecipientPickerItem.h */,
+				A94409FE16F46405007AA4E8 /* ICRecipientPickerItem.m */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -799,6 +809,8 @@
 				A955896D16EF1EBF0007E1A5 /* BaseValueObject.m in Sources */,
 				A955897016EF1FBE0007E1A5 /* FullScreenScrollViewDelegate.m in Sources */,
 				A91AE51516F0ADB600627068 /* SelectorTableViewDelegate.m in Sources */,
+				A94409F516F461E7007AA4E8 /* ICRecipientPicker.m in Sources */,
+				A94409FF16F46406007AA4E8 /* ICRecipientPickerItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

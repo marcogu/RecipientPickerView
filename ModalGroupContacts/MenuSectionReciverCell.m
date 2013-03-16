@@ -27,8 +27,8 @@
 -(TTStyle*)recviverCellStyle:(UIColor*)clr{
     TTTextStyle* tstyle = [TTTextStyle styleWithFont:[UIFont systemFontOfSize:14] next:nil];
     tstyle.numberOfLines = 1;
-    tstyle.lineBreakMode = UILineBreakModeTailTruncation;
-    tstyle.textAlignment = UITextAlignmentLeft;
+//    tstyle.lineBreakMode = UILineBreakModeTailTruncation;
+//    tstyle.textAlignment = UITextAlignmentLeft;
     if (clr!=nil) {
         tstyle.color = clr;
     }
@@ -111,11 +111,6 @@
         
     }
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-//    self.textLabel.text = @"asdfasdfasdfasdfasdfasdfasdfasdfsadf";
-//    if (self.backgroundView==nil) {
-//        self.selectedBackgroundView=[[[UIView alloc] init] autorelease];
-//        self.selectedBackgroundView.backgroundColor = RGBCOLOR(63, 105, 165);
-//    }
 }
 
 -(id)object
