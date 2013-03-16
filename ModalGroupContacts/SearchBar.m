@@ -84,8 +84,8 @@
         _titleLabel.font = [UIFont systemFontOfSize:18.0f];
         _titleLabel.numberOfLines = 0;
         _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.textColor = [UIColor blackColor];
-        _titleLabel.shadowColor = [UIColor whiteColor];
+        _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel.shadowColor = [UIColor grayColor];
         _titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
         _titleLabel.hidden = NO;
         _titleLabel.opaque = NO;
@@ -107,8 +107,8 @@
 
 - (void)drawRect:(CGRect)rect {
     static CGFloat colors[] = { //content background color
-		200.0f / 255.0f, 207.0f / 255.0f, 212.0f / 255.0f, 1.0f,
-        169.0f / 255.0f, 178.0f / 255.0f, 185.0f / 255.0f, 1.0f
+		131.0f / 255.0f, 168.0f / 255.0f, 200.0f / 255.0f, 1.0f,
+        39.0f / 255.0f, 92.0f / 255.0f, 150.0f / 255.0f, 1.0f        
 	};
     [self drawLinearGradientInRect:CGRectMake(0.0f, 0.0f, rect.size.width, 44.0f) colors:colors];
     // bottom line board

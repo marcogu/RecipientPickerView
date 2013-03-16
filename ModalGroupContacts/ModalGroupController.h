@@ -11,7 +11,6 @@
 @class SearchBar;
 
 @interface ModalGroupController : UIViewController
-{
-    SearchBar* _titlBar;
-}
+@property(nonatomic, retain) SearchBar* titlBar;
+@property(nonatomic, retain) UITableView* tableView;
 @end
