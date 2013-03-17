@@ -28,11 +28,22 @@
 - (void)layoutWithScrollView:(UIScrollView*)scrollView deltaY:(CGFloat)deltaY{
     BOOL topViewExisting = _floatHeaderView && _floatHeaderView.superview && !_floatHeaderView.hidden;
     if (topViewExisting) {
-        // TODO: this is not my logic, change it
-        _floatHeaderView.top = MIN(MAX(_floatHeaderView.top-deltaY, STATUS_BAR_HEIGHT-_floatHeaderView.height), STATUS_BAR_HEIGHT);
-        UIEdgeInsets insets = scrollView.scrollIndicatorInsets;
-        insets.top = _floatHeaderView.bottom-STATUS_BAR_HEIGHT;
-        scrollView.scrollIndicatorInsets = insets;
+        // my logic
+        _floatHeaderView.top = MIN(MAX(_floatHeaderView.top-deltaY, 45-_floatHeaderView.height), 45);
+//        CGPoint point = scrollView.contentOffset;
+//        point.y = _floatHeaderView.top;
+//        scrollView.contentOffset = CGPointMake(0, _floatHeaderView.top);
+        
+        NSLog(@"top = %f,offset=%f", _floatFooterView.frame.origin.y, scrollView.contentOffset.y);
+        
+        // TEST CODE
+//        NSLog(@"%f", deltaY);
+//        _floatHeaderView.top = -deltaY;
+        // SAMPLE CODE.
+//        _floatHeaderView.top = MIN(MAX(_floatHeaderView.top-deltaY, STATUS_BAR_HEIGHT-_floatHeaderView.height), STATUS_BAR_HEIGHT);
+//        UIEdgeInsets insets = scrollView.scrollIndicatorInsets;
+//        insets.top = _floatHeaderView.bottom-STATUS_BAR_HEIGHT;
+//        scrollView.scrollIndicatorInsets = insets;
     }
 }
 
@@ -50,6 +61,10 @@
             deltaY = abs(deltaY);
         [self layoutWithScrollView:scrollView deltaY:deltaY];
     }
+}
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [scrollView setScrollIndicatorInsets:UIEdgeInsetsMake(-200, 0, 0, 0)];
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{

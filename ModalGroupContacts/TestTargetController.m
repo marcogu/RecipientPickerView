@@ -95,7 +95,6 @@
 }
 
 -(ICRecipientPickerItem *)recipientPicker:(ICRecipientPicker*)pickerView itemForIndex:(NSInteger)index{
-    NSLog(@"---%d", index);
     ICRecipientPickerItem* item = [[ICRecipientPickerItem alloc] init];
     item.textLabel.text = @"黄胜东";
     return item;
