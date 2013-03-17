@@ -27,8 +27,8 @@
     CGPoint _touchBegan;
 }
 @property (nonatomic, assign) NSInteger index;
-@property (nonatomic, retain)UILabel* textLabel;
-@property (nonatomic, assign)NSObject<ICRecipientPickerItemDelegate>* delegate;
+@property (nonatomic, retain) UILabel* textLabel;
+@property (nonatomic, assign) NSObject<ICRecipientPickerItemDelegate>* delegate;
 @property (nonatomic, retain) id object;
 @property (nonatomic, assign) BOOL highlightTouches;
 @property (nonatomic, assign) CGFloat pickerTextLabelPadding;

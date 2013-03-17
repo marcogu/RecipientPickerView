@@ -25,6 +25,8 @@ typedef enum
 @property (nonatomic, assign) CGFloat itemHeight;
 @property (nonatomic, assign) ICRecipientPickerItem* activeItem;
 @property (nonatomic, assign) ICRecipientPickerSelectionStyle selectionStyle;
+
+-(void)insertItemAtIndex:(NSInteger)index animated:(BOOL)animated;
 @end
 
 @protocol ICRecipientPickerDataSource <NSObject>

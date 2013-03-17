@@ -21,10 +21,10 @@
 #define ITEM_TEXTLABELPADDING_LEFT_AND_RIGHT 10.0;
 
 UIColor* UIColorFromRGB(NSInteger red, NSInteger green, NSInteger blue, NSInteger alpha) {
-    return [UIColor colorWithRed:((float)red)/255.0
+    return [[UIColor colorWithRed:((float)red)/255.0
                            green:((float)green)/255.0
                             blue:((float)blue)/255.0
-                           alpha:((float)alpha)/255.0];
+                           alpha:((float)alpha)/255.0] retain];
 }
 
 @implementation ICRecipientPickerItem
@@ -32,16 +32,15 @@ UIColor* UIColorFromRGB(NSInteger red, NSInteger green, NSInteger blue, NSIntege
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        _unselectedBGColor = DEFAULT_BG_COLOR;
-        _selectedBGColor = DEFAULT_SELECTED_BG_COLOR;
-        _unselectedTextColor = DEFAULT_TEXT_COLOR;
-        _selectedTextColor = DEFAULT_SELECTED_TEXT_COLOR;
-        _unselectedBorderColor = DEFAUL_BORDER_COLOR;
-        _selectedBorderColor = DEFAUL_BORDER_COLOR;
-        
-        _pickerTextLabelPadding = ITEM_TEXTLABELPADDING_LEFT_AND_RIGHT;
-        _highlightTouches = YES;
-        self.backgroundColor = DEFAULT_BG_COLOR;
+        [self createComplete];
+    }
+    return self;
+}
+
+-(id)init{
+    self = [super initWithFrame:CGRectZero];
+    if (self) {
+        [self createComplete];
     }
     return self;
 }
@@ -56,6 +55,19 @@ UIColor* UIColorFromRGB(NSInteger red, NSInteger green, NSInteger blue, NSIntege
     [_selectedBorderColor release];
     [_object release];
     [super dealloc];
+}
+
+-(void)createComplete{
+    _unselectedBGColor = DEFAULT_BG_COLOR;
+    _selectedBGColor = DEFAULT_SELECTED_BG_COLOR;
+    _unselectedTextColor = DEFAULT_TEXT_COLOR;
+    _selectedTextColor = DEFAULT_SELECTED_TEXT_COLOR;
+    _unselectedBorderColor = DEFAUL_BORDER_COLOR;
+    _selectedBorderColor = DEFAUL_BORDER_COLOR;
+    
+    _pickerTextLabelPadding = ITEM_TEXTLABELPADDING_LEFT_AND_RIGHT;
+    _highlightTouches = YES;
+    self.backgroundColor = DEFAULT_BG_COLOR;
 }
 
 -(UILabel*)textLabel{

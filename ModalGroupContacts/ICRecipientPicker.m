@@ -11,6 +11,8 @@
 #define ITEM_ANIMATION_TIME 0.2
 #define ITEM_FADE_TIME 0.2
 
+#define TTDPRINT(xx, ...)  NSLog(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+
 @interface ICRecipientPicker()
 {
     CGFloat nextItemX;
@@ -54,8 +56,7 @@
 }
 
 -(void)renderItemsFromIndex:(NSInteger)start toIndex:(NSInteger)end animated:(BOOL)animated{
-    nextItemX = self.itemPadding;
-    nextItemY = _itemPadding;
+    nextItemY = nextItemX = _itemPadding;
     lineNumber = 1;
     
     [_items enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(start, end-start)] options:NSEnumerationConcurrent usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -68,12 +69,12 @@
         if (itemWidth >= self.frame.size.width-2 * _itemPadding) {
             itemWidth = self.frame.size.width-2 * _itemPadding;
             nextItemX = _itemPadding;
-            nextItemY += lineNumber == 1 ? 0 : _itemHeight + _itemPadding;
+            nextItemY += (lineNumber == 1 ? 0 : (_itemHeight + _itemPadding));
             lineNumber++;
         }else if ((nextItemX + itemWidth) > self.frame.size.width - 2 * _itemPadding){
             lineNumber++;
             nextItemX = _itemPadding;
-            nextItemY += lineNumber == 1 ? 0 : _itemHeight + _itemPadding;
+            nextItemY += (lineNumber == 1 ? 0 : _itemHeight + _itemPadding);
         }
         CGRect itemFrame = CGRectMake(nextItemX, nextItemY, itemWidth, _itemHeight);
         if (animated) {
@@ -84,11 +85,13 @@
         }else{
             pickItem.frame = itemFrame;
         }
+        nextItemX += pickItem.frame.size.width + _itemPadding;
         self.contentSize = CGSizeMake(self.frame.size.width, lineNumber * (_itemHeight + _itemPadding) + _itemPadding);
     }];
 }
 
 -(void)insertItemAtIndex:(NSInteger)index animated:(BOOL)animated{
+    index = [self validateIdx:index];
     ICRecipientPickerItem* pickItem = [self.datasource recipientPicker:self itemForIndex:index];
     [_items insertObject:pickItem atIndex:index];
     pickItem.delegate = self;
@@ -99,15 +102,19 @@
         ((ICRecipientPickerItem*)pickItem).index = idx;
     }];
     if (animated && [_items lastObject] == pickItem) {
-        [self renderItemsFromIndex:0 toIndex:[_items count] animated:NO];
+        [self renderItemsFromIndex:0 toIndex:_items.count animated:NO];
         [self fadeInBubble:pickItem];
     } else if(animated) { // not last item
-        [self renderItemsFromIndex:0 toIndex:[_items count] animated:YES];
+        [self renderItemsFromIndex:0 toIndex:_items.count animated:YES];
         [self performSelector:@selector(fadeInBubble:) withObject:pickItem afterDelay:ITEM_ANIMATION_TIME+ITEM_FADE_TIME];
     }else {
-        [self renderItemsFromIndex:0 toIndex:[_items count] animated:animated];
+        [self renderItemsFromIndex:0 toIndex:_items.count animated:animated];
         pickItem.alpha = 1.0;
     }
+}
+
+-(NSInteger)validateIdx:(NSInteger)idx{
+    return idx < 0 || idx > _items.count ? _items.count : idx;
 }
 
 -(void)fadeInBubble:(ICRecipientPickerItem *)item{
