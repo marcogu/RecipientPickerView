@@ -108,8 +108,8 @@ UIColor* UIColorFromRGB(NSInteger red, NSInteger green, NSInteger blue, NSIntege
         self.textLabel.textColor = _selectedTextColor;
         [UIView commitAnimations];
     }else{
-        self.backgroundColor = _selectedBGColor;
-        self.textLabel.textColor = _selectedTextColor;
+        self.backgroundColor = _unselectedBGColor;
+        self.textLabel.textColor = _unselectedTextColor;
     }
     _isSelected = selected;
 }
