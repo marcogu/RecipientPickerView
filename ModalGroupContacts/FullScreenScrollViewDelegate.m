@@ -29,21 +29,9 @@
     BOOL topViewExisting = _floatHeaderView && _floatHeaderView.superview && !_floatHeaderView.hidden;
     if (topViewExisting) {
         // my logic
-        _floatHeaderView.top = MIN(MAX(_floatHeaderView.top-deltaY, 45-_floatHeaderView.height), 45);
-//        CGPoint point = scrollView.contentOffset;
-//        point.y = _floatHeaderView.top;
-//        scrollView.contentOffset = CGPointMake(0, _floatHeaderView.top);
-        
-        NSLog(@"top = %f,offset=%f", _floatFooterView.frame.origin.y, scrollView.contentOffset.y);
-        
-        // TEST CODE
-//        NSLog(@"%f", deltaY);
-//        _floatHeaderView.top = -deltaY;
-        // SAMPLE CODE.
-//        _floatHeaderView.top = MIN(MAX(_floatHeaderView.top-deltaY, STATUS_BAR_HEIGHT-_floatHeaderView.height), STATUS_BAR_HEIGHT);
-//        UIEdgeInsets insets = scrollView.scrollIndicatorInsets;
-//        insets.top = _floatHeaderView.bottom-STATUS_BAR_HEIGHT;
-//        scrollView.scrollIndicatorInsets = insets;
+        float top = MIN(MAX(_floatHeaderView.top-deltaY, 45-_floatHeaderView.height), 45);
+        _floatHeaderView.top = top;
+//        NSLog(@"top=%f", top);
     }
 }
 
@@ -63,8 +51,11 @@
     }
 }
 
--(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [scrollView setScrollIndicatorInsets:UIEdgeInsetsMake(-200, 0, 0, 0)];
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [UIView beginAnimations:nil context:nil];
+    scrollView.contentInset = UIEdgeInsetsMake(_floatHeaderView.top, 0, 0, 0);
+    [UIView commitAnimations];
+    NSLog(@"end");
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{

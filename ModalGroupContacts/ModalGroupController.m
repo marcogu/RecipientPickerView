@@ -34,6 +34,8 @@
     self.picker.datasource = self;
     
     self.titlBar.titleLabel.text = @"请选择联系人";
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0);
 }
 
 // use test
