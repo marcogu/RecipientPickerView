@@ -19,29 +19,31 @@
 @property(nonatomic, readonly)ICRecipientPicker* picker;
 @end
 
+#define DEFAULT_PICKER_TOP 45
+#define DEFAULT_PICKER_HEIGHT 44
+
 @implementation ModalGroupController
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
-    self.tableViewDataSource = [ICMenuTableDatasource createDemoSections:self.tableView];
+    self.tableViewDataSource = [ICMenuTableDatasource createDemoSections:_tableView];
     self.tableView.dataSource = self.tableViewDataSource;
-    SelectorTableViewDelegate* tbdelegate = [[SelectorTableViewDelegate alloc] initWithAboveViewOnTable:self.picker belowViewOnTable:nil];
+    SelectorTableViewDelegate* tbdelegate = [[SelectorTableViewDelegate alloc] initWithAboveViewOnTable:_picker belowViewOnTable:nil];
     tbdelegate.ds = _tableViewDataSource;
     self.tableView.delegate = tbdelegate;
     self.picker.datasource = self;
-    
-    self.titlBar.titleLabel.text = @"请选择联系人";
-    
-    self.tableView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0);
+    _titlBar.titleLabel.text = @"请选择联系人";
+    _tableView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0);
 }
 
-// use test
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-//    self.tableView.contentOffset = CGPointMake(0, -44);
+-(void)loadView{
+    [super loadView];
+    [self tableView];
+    [self picker];
+    [self titlBar];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 -(SearchBar*)titlBar{
@@ -55,9 +57,9 @@
 
 -(UITableView*)tableView{
     if (!_tableView) {
-        float tableHeight = self.view.frame.size.height-45;
-        CGRect tableFrame = {{0, 45},{self.view.frame.size.width,tableHeight}};
-        _tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:
+                      CGRectMake(0, DEFAULT_PICKER_TOP, self.view.frame.size.width, self.view.frame.size.height-DEFAULT_PICKER_TOP)
+                                                  style:UITableViewStylePlain];
         _tableView.allowsMultipleSelection = YES;
         _tableView.accessibilityLabel = @"reciverTabel";
         [self.view addSubview:_tableView];
@@ -68,9 +70,9 @@
 
 -(ICRecipientPicker*)picker{
     if (!_picker) {
-        _picker = [[ICRecipientPicker alloc] initWithFrame:CGRectMake(0, 45, self.view.frame.size.width, 44)];
+        _picker = [[ICRecipientPicker alloc] initWithFrame:CGRectMake(0, DEFAULT_PICKER_TOP, self.view.frame.size.width, DEFAULT_PICKER_HEIGHT)];
         _picker.selectionStyle = ICRecipientPickerSelectionStyleDefault;
-        _picker.backgroundColor = [UIColor underPageBackgroundColor]; // test model.
+        _picker.backgroundColor = [UIColor colorWithRed:240.0f/255.0f green:238.0f/255.0f blue:230.9f/255.0f alpha:1.0f];
         [self.view addSubview:_picker];
         [_picker release];
     }
@@ -85,5 +87,4 @@
     item.textLabel.text = @"黄胜东";
     return item;
 }
-
 @end

@@ -10,6 +10,7 @@
 #import "ICMenuTableDatasource.h"
 #import "MenuSectionReciverCell.h"
 #import "ICMenuTableSection.h"
+#import "ICRecipientPicker.h"
 
 @implementation SelectorTableViewDelegate
 
@@ -17,6 +18,11 @@
     if (indexPath.row == 0) {
         ICMenuTableSection* section = [self.ds.sections objectAtIndex:indexPath.section];
         [section reverseSection];
+    }else{ // TODO: insert item to picker view.
+        ICRecipientPicker* picker = (ICRecipientPicker*)self.floatHeaderView;
+        NSObject<ICRecipientPickerDataSource>* pickerDataSource = picker.datasource;
+        [picker insertItemAtIndex:-1 animated:YES];  // test ok.
+        TTDPRINT(@"%@", pickerDataSource);
     }
 }
 
@@ -26,5 +32,6 @@
         [section reverseSection];
     }
 }
+
 
 @end

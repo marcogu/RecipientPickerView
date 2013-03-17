@@ -10,7 +10,5 @@
 
 @class ICMenuTableDatasource;
 @interface SelectorTableViewDelegate : FullScreenScrollViewDelegate<UITableViewDelegate>
-{
-}
 @property(nonatomic, assign)ICMenuTableDatasource* ds;
 @end
