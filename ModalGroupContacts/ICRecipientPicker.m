@@ -19,6 +19,7 @@
     CGFloat nextItemY;
     NSInteger lineNumber;
     UIMenuController* menu;
+    BOOL _contentSizeChanged;
 }
 @end
 
@@ -62,6 +63,7 @@
     [_items enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(start, end-start)] options:NSEnumerationConcurrent usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         ICRecipientPickerItem* pickItem = obj;
         [pickItem setSelected:NO animated:animated];
+        _contentSizeChanged = NO;
         if (_selectionStyle == ICRecipientPickerSelectionStyleNone)
             pickItem.highlightTouches = NO;
         CGFloat itemWidth = [pickItem.textLabel.text sizeWithFont:pickItem.textLabel.font
@@ -71,8 +73,10 @@
             nextItemX = _itemPadding;
             nextItemY += (lineNumber == 1 ? 0 : (_itemHeight + _itemPadding));
             lineNumber++;
+            _contentSizeChanged = YES;
         }else if ((nextItemX + itemWidth) > self.frame.size.width - 2 * _itemPadding){
             lineNumber++;
+            _contentSizeChanged = YES;
             nextItemX = _itemPadding;
             nextItemY += (lineNumber == 1 ? 0 : _itemHeight + _itemPadding);
         }
@@ -86,7 +90,14 @@
             pickItem.frame = itemFrame;
         }
         nextItemX += pickItem.frame.size.width + _itemPadding;
-        self.contentSize = CGSizeMake(self.frame.size.width, lineNumber * (_itemHeight + _itemPadding) + _itemPadding);
+
+        if (_contentSizeChanged) {
+            self.contentSize = CGSizeMake(self.frame.size.width, lineNumber * (_itemHeight + _itemPadding) + _itemPadding);
+            float deltaH = self.contentSize.height - self.frame.size.height;
+            if (self.contentOffset.y < deltaH) {
+                [self scrollRectToVisible:CGRectMake(0, deltaH, self.contentSize.width, self.contentSize.height) animated:YES];
+            }
+        }
     }];
 }
 
@@ -110,6 +121,14 @@
     }else {
         [self renderItemsFromIndex:0 toIndex:_items.count animated:animated];
         pickItem.alpha = 1.0;
+    }
+}
+
+-(void)scrollToButtomWithAnimation:(BOOL)animation{
+    float deltaH = self.contentSize.height - self.frame.size.height;
+    if (deltaH > 0 ) {
+        CGRect bottomRect = CGRectMake(0, deltaH, self.contentSize.width, self.frame.size.height);
+        [self scrollRectToVisible:bottomRect animated:animation];
     }
 }
 
@@ -169,5 +188,4 @@
     }
     menu = nil;
 }
-
 @end

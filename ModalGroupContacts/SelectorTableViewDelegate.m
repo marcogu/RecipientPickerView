@@ -23,6 +23,7 @@
         MenuSectionReciverCell* cell = (MenuSectionReciverCell*)[tableView cellForRowAtIndexPath:indexPath];
         NSObject<ICRecipientPickerDataSource>* pickerDataSource = ((ICRecipientPicker*)self.floatHeaderView).datasource;
         [pickerDataSource putItem:cell.object];
+        [self showHeaderViewWithScrollView:tableView animated:YES];
     }
 }
 

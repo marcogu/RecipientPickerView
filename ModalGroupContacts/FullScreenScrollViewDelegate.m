@@ -36,6 +36,18 @@
     return _canMaskTable;
 }
 
+#pragma mark - public
+
+- (void)showHeaderViewWithScrollView:(UIScrollView*)scrollView animated:(BOOL)animated{
+    if (scrollView.contentInset.top < _floatHeaderView.height) {
+        void (^animateContent)(void) = ^(void) {
+            [self layoutWithScrollView:scrollView deltaY:-_floatHeaderView.height];
+            scrollView.contentInset = UIEdgeInsetsMake(_floatHeaderView.top, 0, 0, 0);
+        };
+        animated ? [UIView animateWithDuration:0.2 animations:animateContent] : animateContent();
+    }
+}
+
 #pragma mark - delgate method
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{

@@ -14,7 +14,8 @@
     BOOL    _isScrollingTop;
     BOOL    _canMaskTable;
 }
--(id)initWithAboveViewOnTable:(UIView*)headView belowViewOnTable:(UIView*)footView;
+- (id)initWithAboveViewOnTable:(UIView*)headView belowViewOnTable:(UIView*)footView;
+- (void)showHeaderViewWithScrollView:(UIScrollView*)scrollView animated:(BOOL)animated;
 @property(nonatomic, assign)UIView* floatHeaderView;
 @property(nonatomic, assign)UIView* floatFooterView;
 @end
