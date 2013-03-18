@@ -29,9 +29,8 @@
     BOOL topViewExisting = _floatHeaderView && _floatHeaderView.superview && !_floatHeaderView.hidden;
     if (topViewExisting) {
         // my logic
-        float top = MIN(MAX(_floatHeaderView.top-deltaY, 45-_floatHeaderView.height), 45);
+        float top = MIN(MAX(_floatHeaderView.top-deltaY, scrollView.top-_floatHeaderView.height), scrollView.top);
         _floatHeaderView.top = top;
-//        NSLog(@"top=%f", top);
     }
 }
 
@@ -55,7 +54,6 @@
     [UIView beginAnimations:nil context:nil];
     scrollView.contentInset = UIEdgeInsetsMake(_floatHeaderView.top, 0, 0, 0);
     [UIView commitAnimations];
-    NSLog(@"end");
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
