@@ -11,7 +11,7 @@
 @class ICRecipientPickerItem;
 
 @protocol ICRecipientPickerItemDelegate <NSObject>
--(void)selectedBubbleItem:(ICRecipientPickerItem *)item;
+-(void)selectedPickerItem:(ICRecipientPickerItem *)item;
 @end
 
 @interface ICRecipientPickerItem : UIView

@@ -136,9 +136,10 @@ UIColor* UIColorFromRGB(NSInteger red, NSInteger green, NSInteger blue, NSIntege
     CGPoint touchPoint = [touch locationInView:self];
     if (CGRectContainsPoint(self.bounds, touchPoint)) {
         [self touchesCancelled:touches withEvent:event];
-        if ([self.delegate respondsToSelector:@selector(selectedBubbleItem:)]) {
-            [self.delegate selectedBubbleItem:self];
+        if ([self.delegate respondsToSelector:@selector(selectedPickerItem:)]) {
+            [self.delegate selectedPickerItem:self];
         }
+        return;
     }
     [self setSelected:NO animated:NO];
 }

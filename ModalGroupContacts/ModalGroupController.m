@@ -13,7 +13,7 @@
 #import "SearchBar.h"
 #import "ReciverVo.h"
 
-@interface ModalGroupController ()<ICRecipientPickerDataSource>{
+@interface ModalGroupController ()<ICRecipientPickerDataSource,ICPickerViewDelegate>{
     ICRecipientPicker* _picker;
 }
 @property(nonatomic, retain)ICMenuTableDatasource* tableViewDataSource;
@@ -35,6 +35,7 @@
     tbdelegate.ds = _tableViewDataSource;
     self.tableView.delegate = tbdelegate;
     self.picker.datasource = self;
+    self.picker.pickViewDelegate = self;
     _titlBar.titleLabel.text = @"请选择联系人";
 }
 
@@ -45,6 +46,10 @@
     [self titlBar];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+-(BOOL)canBecomeFirstResponder{
+    return YES;
 }
 
 -(SearchBar*)titlBar{
@@ -72,6 +77,7 @@
 -(ICRecipientPicker*)picker{
     if (!_picker) {
         _picker = [[ICRecipientPicker alloc] initWithFrame:CGRectMake(0, DEFAULT_PICKER_TOP, self.view.frame.size.width, DEFAULT_PICKER_HEIGHT)];
+        _picker.alwaysBounceVertical = YES;
         _picker.selectionStyle = ICRecipientPickerSelectionStyleDefault;
         _picker.backgroundColor = [UIColor colorWithRed:240.0f/255.0f green:238.0f/255.0f blue:230.9f/255.0f alpha:1.0f];
         [self.view addSubview:_picker];
@@ -116,4 +122,34 @@
 -(NSInteger)numberOfItemsInPikcerView:(ICRecipientPicker *)pickerView{
     return self.selectedRecivers.count;
 }
+
+#pragma mark - ICPickerViewDelegate
+
+-(NSArray*)pickerView:(ICRecipientPicker*)view menuItemsForPickerItemAtIndex:(NSInteger)index{
+    UIMenuItem *item0 = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(deleteSelectedReciver:)];
+    NSArray *items = [NSArray arrayWithObjects:item0, nil];
+    [item0 release];
+    return items;
+}
+
+-(BOOL)pickerView:(ICRecipientPicker*)view shouldShowMenuForPickerItemAtIndex:(NSInteger)idx{
+    return NO;
+}
+
+//lock user interface for 'select menu table' and picker view.
+-(void)pickerView:(ICRecipientPicker*)view didSelectPickerItemAtIndex:(NSInteger)index{
+    
+}
+
+-(void)pickerView:(ICRecipientPicker*)view didHideMenuForPickerItemAtIndex:(NSInteger)index{
+    
+}
+
+#pragma mark - menu controller click handler
+
+-(void)deleteSelectedReciver:(id)sender{
+    [self.selectedRecivers removeObject:self.picker.activeItem.object];
+    [self.picker removeItem:self.picker.activeItem animated:YES];
+}
+
 @end

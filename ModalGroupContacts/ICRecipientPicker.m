@@ -82,7 +82,7 @@
         }
         CGRect itemFrame = CGRectMake(nextItemX, nextItemY, itemWidth, _itemHeight);
         if (animated) {
-            [UIView beginAnimations:@"bubbleRendering" context:@"bubbleItems"];
+            [UIView beginAnimations:@"pickerRendering" context:@"pickerItems"];
             [UIView setAnimationDuration:ITEM_ANIMATION_TIME];
             pickItem.frame = itemFrame;
             [UIView commitAnimations];
@@ -114,10 +114,10 @@
     }];
     if (animated && [_items lastObject] == pickItem) {
         [self renderItemsFromIndex:0 toIndex:_items.count animated:NO];
-        [self fadeInBubble:pickItem];
+        [self fadeInItem:pickItem];
     } else if(animated) { // not last item
         [self renderItemsFromIndex:0 toIndex:_items.count animated:YES];
-        [self performSelector:@selector(fadeInBubble:) withObject:pickItem afterDelay:ITEM_ANIMATION_TIME+ITEM_FADE_TIME];
+        [self performSelector:@selector(fadeInItem:) withObject:pickItem afterDelay:ITEM_ANIMATION_TIME+ITEM_FADE_TIME];
     }else {
         [self renderItemsFromIndex:0 toIndex:_items.count animated:animated];
         pickItem.alpha = 1.0;
@@ -136,14 +136,14 @@
     return idx < 0 || idx > _items.count ? _items.count : idx;
 }
 
--(void)fadeInBubble:(ICRecipientPickerItem *)item{
-    [UIView beginAnimations:@"bubbleFadeIn" context:@"bubbleFade"];
+-(void)fadeInItem:(ICRecipientPickerItem *)item{
+    [UIView beginAnimations:@"pickerFadeIn" context:@"pickerFade"];
     item.alpha = 1.0;
     [UIView commitAnimations];
 }
 
 
--(void)selectedBubbleItem:(ICRecipientPickerItem *)item{
+-(void)selectedPickerItem:(ICRecipientPickerItem *)item{
     if (item != _activeItem) {
         switch (_selectionStyle) {
             case ICRecipientPickerSelectionStyleDefault:
@@ -156,13 +156,20 @@
                 break;
         }
     }
-    // notification delegate.
+    if ([_pickViewDelegate respondsToSelector:@selector(pickerView:didSelectPickerItemAtIndex:)])
+        [_pickViewDelegate pickerView:self didSelectPickerItemAtIndex:item.index];
+    if ([_pickViewDelegate respondsToSelector:@selector(pickerView:shouldShowMenuForPickerItemAtIndex:)] &&
+                [_pickViewDelegate pickerView:self shouldShowMenuForPickerItemAtIndex:item.index]) {
+            NSArray* menuItems = [_pickViewDelegate pickerView:self menuItemsForPickerItemAtIndex:item.index];
+            [self showMenuCalloutWthItems:menuItems forPickerItem:item];
+    }
 }
 
 -(void)showMenuCalloutWthItems:(NSArray *)menuItems forPickerItem:(ICRecipientPickerItem*)item{
     [self becomeFirstResponder];
     _activeItem = item;
     menu = [UIMenuController sharedMenuController];
+    menu.menuItems = nil;
     menu.menuItems = menuItems;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowMenuController) name:UIMenuControllerWillShowMenuNotification object:menu];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didHideMenuController) name:UIMenuControllerDidHideMenuNotification object:menu];
@@ -175,6 +182,7 @@
 }
 
 -(void)didHideMenuController{
+//    [self resignFirstResponder];
     self.userInteractionEnabled = YES;
     [_activeItem setSelected:NO animated:YES];
     _activeItem = nil;
