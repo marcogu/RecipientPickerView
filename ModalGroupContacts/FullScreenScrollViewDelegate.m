@@ -9,11 +9,6 @@
 #import "FullScreenScrollViewDelegate.h"
 #import "UIView+YIFullScreenScroll.h"
 
-#define IS_PORTRAIT         UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)
-#define STATUS_BAR_HEIGHT   (IS_PORTRAIT ? [UIApplication sharedApplication].statusBarFrame.size.height : [UIApplication sharedApplication].statusBarFrame.size.width)
-
-#define MIN_SCROLL_DISTANCE_FOR_FULLSCREEN  44
-
 @implementation FullScreenScrollViewDelegate
 
 -(id)initWithAboveViewOnTable:(UIView*)headView belowViewOnTable:(UIView*)footView{
