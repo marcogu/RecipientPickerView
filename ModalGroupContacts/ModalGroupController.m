@@ -11,6 +11,7 @@
 #import "SelectorTableViewDelegate.h"
 #import "ICRecipientPicker.h"
 #import "SearchBar.h"
+#import "ReciverVo.h"
 
 @interface ModalGroupController ()<ICRecipientPickerDataSource>{
     ICRecipientPicker* _picker;
@@ -79,12 +80,36 @@
     return _picker;
 }
 
+-(NSMutableArray*)selectedRecivers{
+    if (!_selectedRecivers) {
+        _selectedRecivers = [[NSMutableArray array] retain];
+    }
+    return _selectedRecivers;
+}
+
+#pragma mark - business method
+
+-(BOOL)containReciver:(NSObject*)reciver{
+    if ([self.selectedRecivers indexOfObject:reciver]==NSNotFound) {
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - ICRecipientPickerDataSource
 
 -(ICRecipientPickerItem *)recipientPicker:(ICRecipientPicker*)pickerView itemForIndex:(NSInteger)index{
-    // test logic.
+    Reciver* vo = [self.selectedRecivers objectAtIndex:index];
     ICRecipientPickerItem* item = [[ICRecipientPickerItem alloc] init];
-    item.textLabel.text = @"黄胜东";
+    item.textLabel.text = vo.reciverName;
+    item.object = vo;
     return item;
+}
+
+-(void)putItem:(NSObject*)item{
+    if (![self containReciver:item]) {
+        [self.selectedRecivers addObject:item];
+        [self.picker insertItemAtIndex:-1 animated:YES];
+    }
 }
 @end

@@ -13,4 +13,5 @@
 @interface ModalGroupController : UIViewController
 @property(nonatomic, retain) SearchBar* titlBar;
 @property(nonatomic, retain) UITableView* tableView;
+@property(nonatomic, retain) NSMutableArray* selectedRecivers;
 @end

@@ -20,6 +20,8 @@
     return self;
 }
 
+#pragma mark - TableViewDataSource method.
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _sections.count;
 }
