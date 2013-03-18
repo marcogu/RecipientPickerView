@@ -182,7 +182,9 @@
 }
 
 -(void)didHideMenuController{
-//    [self resignFirstResponder];
+    [self resignFirstResponder];
+    menu = [UIMenuController sharedMenuController];
+    menu.menuItems = nil;
     self.userInteractionEnabled = YES;
     [_activeItem setSelected:NO animated:YES];
     _activeItem = nil;

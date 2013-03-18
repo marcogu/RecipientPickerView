@@ -133,7 +133,7 @@
 }
 
 -(BOOL)pickerView:(ICRecipientPicker*)view shouldShowMenuForPickerItemAtIndex:(NSInteger)idx{
-    return NO;
+    return YES;
 }
 
 //lock user interface for 'select menu table' and picker view.
