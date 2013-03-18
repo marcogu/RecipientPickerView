@@ -30,7 +30,7 @@ typedef enum
 @end
 
 @protocol ICRecipientPickerDataSource <NSObject>
-//-(NSInteger)numberOfItemsInBubbleView:(HEBubbleView *)bubbleView;
+-(NSInteger)numberOfItemsInPikcerView:(ICRecipientPicker *)pickerView;
 -(ICRecipientPickerItem *)recipientPicker:(ICRecipientPicker*)pickerView itemForIndex:(NSInteger)index;
 -(void)putItem:(NSObject*)item;
 @end

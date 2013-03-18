@@ -12,6 +12,7 @@
 {
     CGFloat _prevContentOffsetY;
     BOOL    _isScrollingTop;
+    BOOL    _canMaskTable;
 }
 -(id)initWithAboveViewOnTable:(UIView*)headView belowViewOnTable:(UIView*)footView;
 @property(nonatomic, assign)UIView* floatHeaderView;

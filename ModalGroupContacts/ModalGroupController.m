@@ -112,4 +112,8 @@
         [self.picker insertItemAtIndex:-1 animated:YES];
     }
 }
+
+-(NSInteger)numberOfItemsInPikcerView:(ICRecipientPicker *)pickerView{
+    return self.selectedRecivers.count;
+}
 @end

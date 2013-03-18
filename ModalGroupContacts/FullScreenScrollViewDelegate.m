@@ -9,6 +9,8 @@
 #import "FullScreenScrollViewDelegate.h"
 #import "UIView+YIFullScreenScroll.h"
 
+#import "ICRecipientPicker.h"
+
 @implementation FullScreenScrollViewDelegate
 
 -(id)initWithAboveViewOnTable:(UIView*)headView belowViewOnTable:(UIView*)footView{
@@ -23,20 +25,26 @@
 - (void)layoutWithScrollView:(UIScrollView*)scrollView deltaY:(CGFloat)deltaY{
     BOOL topViewExisting = _floatHeaderView && _floatHeaderView.superview && !_floatHeaderView.hidden;
     if (topViewExisting) {
-        // my logic
         float top = MIN(MAX(_floatHeaderView.top-deltaY, scrollView.top-_floatHeaderView.height), scrollView.top);
         _floatHeaderView.top = top;
     }
 }
 
+-(BOOL)validateMaskExcutable{
+    ICRecipientPicker* pickerHead = (ICRecipientPicker*)self.floatHeaderView;
+    _canMaskTable = [pickerHead.datasource numberOfItemsInPikcerView:pickerHead] > 0;
+    return _canMaskTable;
+}
+
 #pragma mark - delgate method
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    _prevContentOffsetY = scrollView.contentOffset.y;
+    if([self validateMaskExcutable])
+        _prevContentOffsetY = scrollView.contentOffset.y;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (scrollView.dragging || _isScrollingTop) {
+    if ((scrollView.dragging || _isScrollingTop) && _canMaskTable)  {
         CGFloat deltaY = scrollView.contentOffset.y-_prevContentOffsetY;
         _prevContentOffsetY = MAX(scrollView.contentOffset.y, -scrollView.contentInset.top);
         if (deltaY < 0 && scrollView.contentOffset.y > 0 && !_isScrollingTop)
@@ -46,9 +54,11 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    [UIView beginAnimations:nil context:nil];
-    scrollView.contentInset = UIEdgeInsetsMake(_floatHeaderView.top, 0, 0, 0);
-    [UIView commitAnimations];
+    if (_canMaskTable) {
+        [UIView beginAnimations:nil context:nil];
+        scrollView.contentInset = UIEdgeInsetsMake(_floatHeaderView.top, 0, 0, 0);
+        [UIView commitAnimations];
+    }
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
