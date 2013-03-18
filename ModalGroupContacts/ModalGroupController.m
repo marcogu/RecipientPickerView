@@ -20,8 +20,9 @@
 @property(nonatomic, readonly)ICRecipientPicker* picker;
 @end
 
-#define DEFAULT_PICKER_TOP 45
+#define DEFAULT_PICKER_TOP 0
 #define DEFAULT_PICKER_HEIGHT 44
+#define DEFAULT_TABLE_TOP 45
 
 @implementation ModalGroupController
 
@@ -35,7 +36,6 @@
     self.tableView.delegate = tbdelegate;
     self.picker.datasource = self;
     _titlBar.titleLabel.text = @"请选择联系人";
-    _tableView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0);
 }
 
 -(void)loadView{
@@ -59,7 +59,7 @@
 -(UITableView*)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:
-                      CGRectMake(0, DEFAULT_PICKER_TOP, self.view.frame.size.width, self.view.frame.size.height-DEFAULT_PICKER_TOP)
+                      CGRectMake(0, DEFAULT_TABLE_TOP, self.view.frame.size.width, self.view.frame.size.height-DEFAULT_TABLE_TOP)
                                                   style:UITableViewStylePlain];
         _tableView.allowsMultipleSelection = YES;
         _tableView.accessibilityLabel = @"reciverTabel";
