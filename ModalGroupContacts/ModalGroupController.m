@@ -136,13 +136,12 @@
     return YES;
 }
 
-//lock user interface for 'select menu table' and picker view.
 -(void)pickerView:(ICRecipientPicker*)view didSelectPickerItemAtIndex:(NSInteger)index{
-    
+    self.view.userInteractionEnabled = NO;
 }
 
 -(void)pickerView:(ICRecipientPicker*)view didHideMenuForPickerItemAtIndex:(NSInteger)index{
-    
+    self.view.userInteractionEnabled = YES;
 }
 
 #pragma mark - menu controller click handler
@@ -151,5 +150,6 @@
     [self.selectedRecivers removeObject:self.picker.activeItem.object];
     [self.picker removeItem:self.picker.activeItem animated:YES];
 }
+
 
 @end

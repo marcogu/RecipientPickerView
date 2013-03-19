@@ -183,13 +183,15 @@
 
 -(void)didHideMenuController{
     [self resignFirstResponder];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     menu = [UIMenuController sharedMenuController];
     menu.menuItems = nil;
+    
     self.userInteractionEnabled = YES;
     [_activeItem setSelected:NO animated:YES];
+    if ([self.pickViewDelegate respondsToSelector:@selector(pickerView:didHideMenuForPickerItemAtIndex:)])
+        [self.pickViewDelegate pickerView:self didHideMenuForPickerItemAtIndex:_activeItem.index];
     _activeItem = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    // notification delegate.
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
