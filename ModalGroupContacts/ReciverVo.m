@@ -64,8 +64,6 @@
     [group1.memberList addObject:member];
     [member release];
     
-    
-    
     member = [[Reciver alloc] init];
     member.avatar = @"http://baby.iclass.com/public/img/userAvatar/50/ic_user.png";
     member.reciverName = @"成哲";
@@ -89,6 +87,54 @@
     member.otherInfo = @"Teacher_1415_徐玉珠";
     [group2.memberList addObject:member];
     [member release];
+    // new add member
+    member = [[Reciver alloc] init];
+    member.avatar = @"http://www.iclass.com/public/img/defaultAvatar/fir_ava1.png";
+    member.reciverName = @"测试者";
+    member.reciverId = [NSNumber numberWithInt:2011];
+    member.otherInfo = @"Teacher_2011_测试者";
+    [group2.memberList addObject:member];
+    [member release];
+    
+    member = [[Reciver alloc] init];
+    member.avatar = @"http://www.iclass.com/public/img/defaultAvatar/fir_ava2.png";
+    member.reciverName = @"被测试者";
+    member.reciverId = [NSNumber numberWithInt:2012];
+    member.otherInfo = @"Parent_2012_被测试者";
+    [group2.memberList addObject:member];
+    [member release];
+    
+    member = [[Reciver alloc] init];
+    member.avatar = @"http://www.iclass.com/public/img/defaultAvatar/fir_ava3.png";
+    member.reciverName = @"名字比较长的被测试者";
+    member.reciverId = [NSNumber numberWithInt:2013];
+    member.otherInfo = @"Parent_2013_名字比较长的被测试者";
+    [group2.memberList addObject:member];
+    [member release];
+    
+    member = [[Reciver alloc] init];
+    member.avatar = @"http://www.iclass.com/public/img/defaultAvatar/fir_ava4.png";
+    member.reciverName = @"短名字";
+    member.reciverId = [NSNumber numberWithInt:2014];
+    member.otherInfo = @"Teacher_2014_短名字";
+    [group2.memberList addObject:member];
+    [member release];
+    
+    member = [[Reciver alloc] init];
+    member.avatar = @"http://www.iclass.com/public/img/defaultAvatar/fir_ava5.png";
+    member.reciverName = @"1";
+    member.reciverId = [NSNumber numberWithInt:2015];
+    member.otherInfo = @"Teacher_2015_1";
+    [group2.memberList addObject:member];
+    [member release];
+    
+    member = [[Reciver alloc] init];
+    member.avatar = @"http://www.iclass.com/public/img/defaultAvatar/fir_ava6.png";
+    member.reciverName = @"马岩";
+    member.reciverId = [NSNumber numberWithInt:2016];
+    member.otherInfo = @"Parent_2016_马岩";
+    [group2.memberList addObject:member];
+    [member release];
     
     
     NSArray* result = [NSArray arrayWithObjects:group1,group2, nil];
@@ -97,42 +143,3 @@
     return result;
 }
 @end
-/*iclass baby logic */
-/**
--(id)initWithDictionary:(NSDictionary*)dic{
-    self = [super init];
-    if (self) {
-        self.reciverName = [dic objectForKey:@"groupName"];
-        self.reciverId = [dic objectForKey: @"gid"];
-        self.r=[dic objectForKey:@"r"];
-        self.g=[dic objectForKey:@"g"];
-        self.b=[dic objectForKey:@"b"];
-        _isGroup = YES;
-        self.otherInfo=[dic objectForKey:@"otherInfo"];
-        self.roleWeight=[dic objectForKey:@"roleWeight"];
-        
-        _memberList=[[NSMutableArray array] retain];
-        NSArray *dicMemberList=[dic objectForKey:@"memberList"];
-        if (dicMemberList) {
-            [dicMemberList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                ReciverVo *memberVo=[[ReciverVo alloc] initMemberVoWithDic:obj];
-                [_memberList addObject:memberVo];
-                [memberVo release];
-            }];
-        }
-    }
-    return self;
-}
-
--(id)initMemberVoWithDic:(NSDictionary*)dic{
-    self.reciverName = [dic objectForKey:@"fullName"];
-    self.reciverId = [dic objectForKey: @"mid"];
-    self.avatar=[dic objectForKey:@"avatar"];
-    self.otherInfo=[dic objectForKey:@"otherInfo"];
-    self.roleWeight=[dic objectForKey:@"roleWeight"];
-    
-    _isGroup=NO;
-    return  self;
-}
-*/
-
