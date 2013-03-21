@@ -24,6 +24,7 @@
         NSObject<ICRecipientPickerDataSource>* pickerDataSource = ((ICRecipientPicker*)self.floatHeaderView).datasource;
         [pickerDataSource putItem:cell.object];
         [self showHeaderViewWithScrollView:tableView animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
 

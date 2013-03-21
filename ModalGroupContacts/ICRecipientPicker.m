@@ -21,6 +21,7 @@
     UIMenuController* menu;
     BOOL _contentSizeChanged;
 }
+-(void)removeItem:(ICRecipientPickerItem *)item animated:(BOOL)animated;
 @end
 
 @implementation ICRecipientPicker

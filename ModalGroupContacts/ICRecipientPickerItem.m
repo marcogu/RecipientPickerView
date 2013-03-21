@@ -104,10 +104,10 @@ UIColor* UIColorFromRGB(NSInteger red, NSInteger green, NSInteger blue, NSIntege
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.1];
         [UIView setAnimationBeginsFromCurrentState:YES];
-        self.backgroundColor = _selectedBGColor;
-        self.textLabel.textColor = _selectedTextColor;
+        self.backgroundColor = _unselectedBGColor;
+        self.textLabel.textColor = _unselectedTextColor;
         [UIView commitAnimations];
-    }else{
+    }else{ // selected and animated are no
         self.backgroundColor = _unselectedBGColor;
         self.textLabel.textColor = _unselectedTextColor;
     }

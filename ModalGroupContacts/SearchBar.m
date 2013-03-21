@@ -7,6 +7,7 @@
 //
 
 #import "SearchBar.h"
+#import "ModalGroupController.h"
 
 @interface SearchBar()<UIGestureRecognizerDelegate>
 {
@@ -15,12 +16,14 @@
     UIButton* _searchBtn;
     UITextField* _searchInput;
     UIButton* _conformBtn;
+    UITableView* _searchResultTable;
     BOOL _isopen;
 }
 @property(nonatomic, retain) UIView* actionPickerView;
 @property(nonatomic, readonly) UIButton* searchBtn;
 @property(nonatomic, readonly) UITextField* searchInput;
 @property(nonatomic, readonly) UIButton* conformBtn;
+@property(nonatomic, readonly) UITableView* searchResultTable;
 @end
 
 @implementation SearchBar
@@ -45,7 +48,7 @@
 
 -(void)setup{
     self.backgroundColor = [UIColor clearColor];
-//    [self conformBtn];
+    [self conformBtn];
     [self titleLabel];
     _backgroundLayer = [self createBackgroundLayer];
     UITapGestureRecognizer *tapGesture =
@@ -228,12 +231,27 @@
 // here need three20. UI 
 -(UIButton*)conformBtn{
     if (!_conformBtn) {
-        _conformBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _conformBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _conformBtn.frame = CGRectMake(15, 7, 40, 30);
+        [_conformBtn addTarget:self action:@selector(btnConformClick) forControlEvents:UIControlEventTouchUpInside];
         [_conformBtn setTitle:@"确定" forState:UIControlStateNormal];
         [self addSubview:_conformBtn];
     }
     return _conformBtn;
 }
 
+//-(UITableView*)searchResultTable{
+//    if (!_searchResultTable) {
+//        _searchResultTable = [[UITableView alloc] initWithFrame: style:];
+//        
+//        [self.superViewController addSearchResultTableBeSubView:_searchResultTable];
+//        _searchResultTable.dataSource = self;
+//        _searchResultTable.delegate = self;
+//    }
+//    return _searchResultTable;
+//}
+
+-(void)btnConformClick{
+    [self.superViewController.navigationController popViewControllerAnimated:YES];
+}
 @end

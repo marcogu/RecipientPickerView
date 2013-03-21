@@ -44,6 +44,11 @@
     return _btnGotoTarget;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillAppear:animated];
+}
+
 -(UIButton*)btnNewReciver{
     if (!_btnNewReciver) {
         _btnNewReciver = [UIButton buttonWithType:UIButtonTypeRoundedRect];

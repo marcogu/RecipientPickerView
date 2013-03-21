@@ -34,8 +34,10 @@
     SelectorTableViewDelegate* tbdelegate = [[SelectorTableViewDelegate alloc] initWithAboveViewOnTable:_picker belowViewOnTable:nil];
     tbdelegate.ds = _tableViewDataSource;
     self.tableView.delegate = tbdelegate;
+    
     self.picker.datasource = self;
     self.picker.pickViewDelegate = self;
+    
     _titlBar.titleLabel.text = @"请选择联系人";
 }
 
@@ -55,6 +57,7 @@
 -(SearchBar*)titlBar{
     if (!_titlBar) {
         _titlBar = [[SearchBar alloc] init];
+        _titlBar.superViewController = self;
         [self.view addSubview:_titlBar];
         [_titlBar release];
     }
@@ -91,6 +94,10 @@
         _selectedRecivers = [[NSMutableArray array] retain];
     }
     return _selectedRecivers;
+}
+
+-(void)addSearchResultTableBeSubView:(UITableView*)searchResultTable{
+    
 }
 
 #pragma mark - business method
@@ -147,8 +154,8 @@
 #pragma mark - menu controller click handler
 
 -(void)deleteSelectedReciver:(id)sender{
-    [self.selectedRecivers removeObject:self.picker.activeItem.object];
-    [self.picker removeItem:self.picker.activeItem animated:YES];
+    [self.selectedRecivers removeObjectAtIndex:self.picker.activeItem.index];
+    [self.picker removeItemAtIndex:self.picker.activeItem.index animated:YES];
 }
 
 

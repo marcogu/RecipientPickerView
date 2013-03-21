@@ -30,7 +30,7 @@ typedef enum
 @property (nonatomic, assign) ICRecipientPickerSelectionStyle selectionStyle;
 
 -(void)insertItemAtIndex:(NSInteger)index animated:(BOOL)animated;
--(void)removeItem:(ICRecipientPickerItem *)item animated:(BOOL)animated;
+-(void)removeItemAtIndex:(NSInteger)index animated:(BOOL)animated;
 @end
 
 @protocol ICRecipientPickerDataSource <NSObject>
