@@ -96,9 +96,9 @@
     return _selectedRecivers;
 }
 
--(void)addSearchResultTableBeSubView:(UITableView*)searchResultTable{
-    
-}
+//-(void)addSearchResultTableBeSubView:(UITableView*)searchResultTable{
+//    
+//}
 
 #pragma mark - business method
 

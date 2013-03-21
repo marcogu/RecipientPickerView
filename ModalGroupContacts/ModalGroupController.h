@@ -15,5 +15,5 @@
 @property(nonatomic, retain) UITableView* tableView;
 @property(nonatomic, retain) NSMutableArray* selectedRecivers;
 
--(void)addSearchResultTableBeSubView:(UITableView*)searchResultTable;
+//-(void)addSearchResultTableBeSubView:(UITableView*)searchResultTable;
 @end

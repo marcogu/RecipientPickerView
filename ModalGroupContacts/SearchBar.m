@@ -51,18 +51,23 @@
     [self conformBtn];
     [self titleLabel];
     _backgroundLayer = [self createBackgroundLayer];
-    UITapGestureRecognizer *tapGesture =
-        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleActionPickerViewTap:)];
-    tapGesture.delegate = self;
+//    UITapGestureRecognizer *tapGesture =
+//        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleActionPickerViewTap:)];
+//    tapGesture.delegate = self;
     [self.actionPickerView.layer addSublayer:_backgroundLayer];
-    [self.actionPickerView addGestureRecognizer:tapGesture];
+//    [self.actionPickerView addGestureRecognizer:tapGesture];
     [self.actionPickerView addSubview:self.searchBtn];
     [self.actionPickerView addSubview:self.searchInput];
-    [tapGesture release];
+//    [tapGesture release];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keboardHiden:) name:UIKeyboardWillHideNotification object:nil];
+    
     _isopen = NO;
 }
 
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_titleLabel release];
     [_actionPickerView release];
     [_items release];
@@ -158,7 +163,7 @@
 	CGContextRestoreGState(context);
 }
 
-- (void)handleActionPickerViewTap:(UIGestureRecognizer *)gestureRecognizer {}
+//- (void)handleActionPickerViewTap:(UIGestureRecognizer *)gestureRecognizer {}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     for (UIView *subview in self.actionPickerView.subviews) {
@@ -181,11 +186,11 @@
     }
     _isopen = YES;
     [self.searchInput becomeFirstResponder];
-    __block __typeof__(self) blockSelf = self;
+//    __block __typeof__(self) blockSelf = self;
     [UIView animateWithDuration:0.2
         animations:^{
-            blockSelf.actionPickerView.frame = CGRectMake(10.0f, 7.0f, blockSelf.frame.size.width - 20.0f, 30.0f);
-            [blockSelf.titleLabel setAlpha:0.0f];
+            _actionPickerView.frame = CGRectMake(10.0f, 7.0f, self.frame.size.width - 20.0f, 30.0f);
+            [_titleLabel setAlpha:0.0f];
     }];
 }
 
@@ -196,18 +201,26 @@
     _isopen = NO;
     self.searchInput.text = nil;
     [self.searchInput resignFirstResponder];
-    __block __typeof__(self) blockSelf = self;
+//    __block __typeof__(self) blockSelf = self;
     [UIView animateWithDuration:0.2
         animations:^{
-            blockSelf.actionPickerView.frame = CGRectMake(blockSelf.frame.size.width - 40.0f, 7.0f, 30.0f, 30.0f);
-            [blockSelf.titleLabel setAlpha:1.0f];
+            _actionPickerView.frame = CGRectMake(self.frame.size.width - 40.0f, 7.0f, 30.0f, 30.0f);
+            [_titleLabel setAlpha:1.0f];
     }];
+}
+
+-(void)reverseState{
+    if (_isopen) {
+        [self close];
+    }else{
+        [self open];
+    }
 }
 
 -(UIButton*)searchBtn{
     if(!_searchBtn) {
         _searchBtn = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-        [_searchBtn addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        [_searchBtn addTarget:self action:@selector(reverseState) forControlEvents:UIControlEventTouchUpInside];
         [_searchBtn setImage:[UIImage imageNamed:@"UIButtonBarSearch"] forState:UIControlStateNormal];
         _searchBtn.frame = CGRectMake(0.0f, 0.0f, 30.0f, 30.0f);
         _searchBtn.imageEdgeInsets = UIEdgeInsetsMake(3.0f, 3.0f, 3.0f, 3.0f);
@@ -240,18 +253,76 @@
     return _conformBtn;
 }
 
-//-(UITableView*)searchResultTable{
-//    if (!_searchResultTable) {
-//        _searchResultTable = [[UITableView alloc] initWithFrame: style:];
-//        
+-(UITableView*)searchResultTable{
+    if (!_searchResultTable) {
+        _searchResultTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
 //        [self.superViewController addSearchResultTableBeSubView:_searchResultTable];
-//        _searchResultTable.dataSource = self;
-//        _searchResultTable.delegate = self;
-//    }
-//    return _searchResultTable;
-//}
+        [self.superViewController.view addSubview:_searchResultTable];
+        _searchResultTable.dataSource = self;
+        _searchResultTable.delegate = self;
+    }
+    return _searchResultTable;
+}
 
 -(void)btnConformClick{
     [self.superViewController.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return nil;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    self.searchResultTable.frame = {};
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
+//    self.searchResultTable.frame = {};
+}
+
+#pragma mark - notification center event handler.
+
+-(void)keboardShow:(NSNotification *)note{
+    if (_isopen) {
+        CGRect keyboardBounds;
+        [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+        float bottom = self.frame.origin.y + self.frame.size.height;
+        float height = self.superViewController.view.frame.size.height - keyboardBounds.size.height - self.frame.size.height;
+        self.searchResultTable.frame = CGRectMake(0, bottom, self.frame.size.width, height);
+    }
+    
+    /*
+     
+     NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+     NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+     keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+     CGRect containerFrame = containerView.frame;
+     containerFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height + containerFrame.size.height);
+     
+     [UIView beginAnimations:nil context:NULL];
+     [UIView setAnimationBeginsFromCurrentState:YES];
+     [UIView setAnimationDuration:[duration doubleValue]];
+     [UIView setAnimationCurve:[curve intValue]];
+     containerView.frame = containerFrame;
+     _replyListTable.height = containerView.top;
+     if (_replydataSource.items.count > 0) {
+     NSIndexPath *lastRow = [NSIndexPath indexPathForRow:_replydataSource.items.count-1 inSection:0];
+     [_replyListTable scrollToRowAtIndexPath:lastRow atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+     }
+     [UIView commitAnimations];
+     */
+}
+
+-(void)keboardHiden:(NSNotification *)note{
+    self.searchResultTable.frame = CGRectZero;
+}
+
 @end

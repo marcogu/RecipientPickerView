@@ -10,7 +10,7 @@
 
 @class ModalGroupController;
 
-@interface SearchBar : UIView
+@interface SearchBar : UIView<UITableViewDataSource, UITableViewDelegate>
 {
     UILabel* _titleLabel;
 }
@@ -19,4 +19,8 @@
 - (void)shrinkActionPicker;
 - (void)close;
 - (void)open;
+@end
+
+@interface SearchManager : NSObject
+-(SearchManager*)initWithDatas:(NSArray*)datas;
 @end
