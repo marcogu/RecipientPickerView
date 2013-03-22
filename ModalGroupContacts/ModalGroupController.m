@@ -17,7 +17,6 @@
     ICRecipientPicker* _picker;
 }
 @property(nonatomic, retain)ICMenuTableDatasource* tableViewDataSource;
-@property(nonatomic, readonly)ICRecipientPicker* picker;
 @end
 
 #define DEFAULT_PICKER_TOP 0
@@ -95,10 +94,6 @@
     }
     return _selectedRecivers;
 }
-
-//-(void)addSearchResultTableBeSubView:(UITableView*)searchResultTable{
-//    
-//}
 
 #pragma mark - business method
 

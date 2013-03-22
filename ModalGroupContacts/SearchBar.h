@@ -13,6 +13,7 @@
 @interface SearchBar : UIView<UITableViewDataSource, UITableViewDelegate>
 {
     UILabel* _titleLabel;
+    NSMutableArray* _selectedItem;
 }
 @property(nonatomic, readonly) UILabel* titleLabel;
 @property(nonatomic, assign) ModalGroupController* superViewController;
@@ -21,6 +22,6 @@
 - (void)open;
 @end
 
-@interface SearchManager : NSObject
--(SearchManager*)initWithDatas:(NSArray*)datas;
-@end
+//@interface SearchManager : NSObject
+//-(SearchManager*)initWithDatas:(NSArray*)datas;
+//@end

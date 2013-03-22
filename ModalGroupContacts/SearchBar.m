@@ -8,6 +8,9 @@
 
 #import "SearchBar.h"
 #import "ModalGroupController.h"
+#import "ICRecipientPicker.h"
+
+#define SEARCHBAR_CONTENT_HEIGHT 44
 
 @interface SearchBar()<UIGestureRecognizerDelegate>
 {
@@ -51,18 +54,16 @@
     [self conformBtn];
     [self titleLabel];
     _backgroundLayer = [self createBackgroundLayer];
-//    UITapGestureRecognizer *tapGesture =
-//        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleActionPickerViewTap:)];
-//    tapGesture.delegate = self;
     [self.actionPickerView.layer addSublayer:_backgroundLayer];
-//    [self.actionPickerView addGestureRecognizer:tapGesture];
     [self.actionPickerView addSubview:self.searchBtn];
     [self.actionPickerView addSubview:self.searchInput];
-//    [tapGesture release];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keboardHiden:) name:UIKeyboardWillHideNotification object:nil];
     
+    _selectedItem = [[NSMutableArray array] retain];
+    [self fillTestDataForTest:_selectedItem];
     _isopen = NO;
 }
 
@@ -71,6 +72,7 @@
     [_titleLabel release];
     [_actionPickerView release];
     [_items release];
+    [_selectedItem release];
     [super dealloc];
 }
 
@@ -256,10 +258,10 @@
 -(UITableView*)searchResultTable{
     if (!_searchResultTable) {
         _searchResultTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-//        [self.superViewController addSearchResultTableBeSubView:_searchResultTable];
-        [self.superViewController.view addSubview:_searchResultTable];
+        [self.superViewController.view insertSubview:_searchResultTable belowSubview:self.superViewController.picker];
         _searchResultTable.dataSource = self;
         _searchResultTable.delegate = self;
+        [_searchResultTable release];
     }
     return _searchResultTable;
 }
@@ -268,61 +270,75 @@
     [self.superViewController.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)fillTestDataForTest:(NSMutableArray*) inoutArg{
+    [inoutArg addObject:@"item1"];
+    [inoutArg addObject:@"item2"];
+    [inoutArg addObject:@"item3"];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return _selectedItem.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
+    // test logic
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"searchBarResultCell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] init];
+    }
+    cell.textLabel.text = [_selectedItem objectAtIndex:indexPath.row];
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    self.searchResultTable.frame = {};
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self close];
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
-//    self.searchResultTable.frame = {};
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"item be deselected %@", indexPath);
 }
 
 #pragma mark - notification center event handler.
 
--(void)keboardShow:(NSNotification *)note{
+-(void)keboardWillShow:(NSNotification *)info{
+    if (_isopen) {
+        ICRecipientPicker* pv = self.superViewController.picker;
+        if ([pv.datasource numberOfItemsInPikcerView:pv] > 0 && pv.frame.origin.y < SEARCHBAR_CONTENT_HEIGHT) {
+            float tbHeight = self.superViewController.view.frame.size.height - SEARCHBAR_CONTENT_HEIGHT - pv.frame.size.height;
+//            self.searchResultTable.frame = CGRectMake(0, SEARCHBAR_CONTENT_HEIGHT + pv.frame.size.height, self.frame.size.width, tbHeight);
+            self.searchResultTable.frame = CGRectMake(0, SEARCHBAR_CONTENT_HEIGHT, self.frame.size.width, tbHeight);
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                pv.frame = CGRectMake(0, SEARCHBAR_CONTENT_HEIGHT, pv.frame.size.width, pv.frame.size.height);
+            }];
+        } else {
+            float tbHeight = self.superViewController.view.frame.size.height - SEARCHBAR_CONTENT_HEIGHT;
+            self.searchResultTable.frame = CGRectMake(0, SEARCHBAR_CONTENT_HEIGHT, self.frame.size.width, tbHeight);
+        }
+    }
+}
+
+-(void)keboardDidShow:(NSNotification *)info{
     if (_isopen) {
         CGRect keyboardBounds;
-        [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
-        float bottom = self.frame.origin.y + self.frame.size.height;
-        float height = self.superViewController.view.frame.size.height - keyboardBounds.size.height - self.frame.size.height;
-        self.searchResultTable.frame = CGRectMake(0, bottom, self.frame.size.width, height);
+        [[info.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+        ICRecipientPicker* pv = self.superViewController.picker;
+        [UIView beginAnimations:nil context:nil];
+        if ([pv.datasource numberOfItemsInPikcerView:pv] > 0) {
+            self.searchResultTable.frame = CGRectMake(0, SEARCHBAR_CONTENT_HEIGHT + pv.frame.size.height, self.frame.size.width, self.superViewController.view.frame.size.height - keyboardBounds.size.height - pv.frame.size.height);
+        }else{
+            self.searchResultTable.frame = CGRectMake(0, SEARCHBAR_CONTENT_HEIGHT, self.frame.size.width, self.superViewController.view.frame.size.height - keyboardBounds.size.height - SEARCHBAR_CONTENT_HEIGHT);
+        }
+        [UIView commitAnimations];
     }
-    
-    /*
-     
-     NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-     NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
-     keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
-     CGRect containerFrame = containerView.frame;
-     containerFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height + containerFrame.size.height);
-     
-     [UIView beginAnimations:nil context:NULL];
-     [UIView setAnimationBeginsFromCurrentState:YES];
-     [UIView setAnimationDuration:[duration doubleValue]];
-     [UIView setAnimationCurve:[curve intValue]];
-     containerView.frame = containerFrame;
-     _replyListTable.height = containerView.top;
-     if (_replydataSource.items.count > 0) {
-     NSIndexPath *lastRow = [NSIndexPath indexPathForRow:_replydataSource.items.count-1 inSection:0];
-     [_replyListTable scrollToRowAtIndexPath:lastRow atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-     }
-     [UIView commitAnimations];
-     */
 }
 
 -(void)keboardHiden:(NSNotification *)note{
     self.searchResultTable.frame = CGRectZero;
 }
-
 @end
