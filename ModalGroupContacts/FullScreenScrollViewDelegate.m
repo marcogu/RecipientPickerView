@@ -25,7 +25,18 @@
 - (void)layoutWithScrollView:(UIScrollView*)scrollView deltaY:(CGFloat)deltaY{
     BOOL topViewExisting = _floatHeaderView && _floatHeaderView.superview && !_floatHeaderView.hidden;
     if (topViewExisting) {
-        float top = MIN(MAX(_floatHeaderView.top-deltaY, scrollView.top-_floatHeaderView.height), scrollView.top);
+        if ((_floatHeaderView.top == scrollView.top && deltaY<0) ||
+            (_floatHeaderView.bottom < scrollView.top && deltaY > 0)) {
+            return;
+        }
+        float top = _floatHeaderView.top;
+        top += -deltaY;
+        if (top > scrollView.top) {
+            top = scrollView.top;
+        }
+        if (top + _floatHeaderView.height < scrollView.top) {
+            top = scrollView.top - _floatHeaderView.height;
+        }
         _floatHeaderView.top = top;
     }
 }
@@ -59,8 +70,6 @@
     if ((scrollView.dragging || _isScrollingTop) && _canMaskTable)  {
         CGFloat deltaY = scrollView.contentOffset.y-_prevContentOffsetY;
         _prevContentOffsetY = MAX(scrollView.contentOffset.y, -scrollView.contentInset.top);
-        if (deltaY < 0 && scrollView.contentOffset.y > 0 && !_isScrollingTop)
-            deltaY = abs(deltaY);
         [self layoutWithScrollView:scrollView deltaY:deltaY];
     }
 }
