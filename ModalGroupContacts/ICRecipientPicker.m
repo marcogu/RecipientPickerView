@@ -18,8 +18,8 @@
     CGFloat nextItemX;
     CGFloat nextItemY;
     NSInteger lineNumber;
+    NSInteger olderLineNo;
     UIMenuController* menu;
-    BOOL _contentSizeChanged;
 }
 -(void)removeItem:(ICRecipientPickerItem *)item animated:(BOOL)animated;
 @end
@@ -64,7 +64,6 @@
     [_items enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(start, end-start)] options:NSEnumerationConcurrent usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         ICRecipientPickerItem* pickItem = obj;
         [pickItem setSelected:NO animated:animated];
-        _contentSizeChanged = NO;
         if (_selectionStyle == ICRecipientPickerSelectionStyleNone)
             pickItem.highlightTouches = NO;
         CGFloat itemWidth = [pickItem.textLabel.text sizeWithFont:pickItem.textLabel.font
@@ -74,10 +73,8 @@
             nextItemX = _itemPadding;
             nextItemY += (lineNumber == 1 ? 0 : (_itemHeight + _itemPadding));
             lineNumber++;
-            _contentSizeChanged = YES;
         }else if ((nextItemX + itemWidth) > self.frame.size.width - 2 * _itemPadding){
             lineNumber++;
-            _contentSizeChanged = YES;
             nextItemX = _itemPadding;
             nextItemY += (lineNumber == 1 ? 0 : _itemHeight + _itemPadding);
         }
@@ -91,15 +88,14 @@
             pickItem.frame = itemFrame;
         }
         nextItemX += pickItem.frame.size.width + _itemPadding;
-
-        if (_contentSizeChanged) {
-            self.contentSize = CGSizeMake(self.frame.size.width, lineNumber * (_itemHeight + _itemPadding) + _itemPadding);
-            float deltaH = self.contentSize.height - self.frame.size.height;
-            if (self.contentOffset.y < deltaH) {
-                [self scrollRectToVisible:CGRectMake(0, deltaH, self.contentSize.width, self.contentSize.height) animated:YES];
-            }
-        }
     }];
+    
+    if (lineNumber != olderLineNo) {
+        olderLineNo = lineNumber;
+        self.contentSize = CGSizeMake(self.frame.size.width, lineNumber * (_itemHeight + _itemPadding) + _itemPadding);
+        float deltaH = self.contentSize.height - self.frame.size.height;
+        [self scrollRectToVisible:CGRectMake(0, deltaH, self.contentSize.width, self.contentSize.height) animated:YES];
+    }
 }
 
 -(void)insertItemAtIndex:(NSInteger)index animated:(BOOL)animated{
